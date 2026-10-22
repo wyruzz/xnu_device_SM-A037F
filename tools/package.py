@@ -20,7 +20,7 @@ def main():
  if missing: ap.error("missing required input(s): "+", ".join(missing))
  manifest={"kind":"a03s-development-bundle","target":"Samsung Galaxy A03s SM-A037F / MediaTek MT6765","components":[{"path":n,"bytes":p.stat().st_size,"sha256":digest(p)} for n,p in items],"bootable":False,"xnu_handoff_implemented":False,"hardware_tested":False,"note":"Artifact archive only; not an Android/Samsung boot image. Do not flash."}
  a.output.parent.mkdir(parents=True,exist_ok=True); mp=a.output.parent/"build-manifest.json"
- mp.write_text(json.dumps(manifest,indent=2)+"\\n")
+ mp.write_text(json.dumps(manifest,indent=2)+"\n")
  try:
   with tarfile.open(a.output,"w:gz") as t:
    for name,p in items: t.add(p,arcname=name,recursive=False)

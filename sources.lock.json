@@ -8,5 +8,13 @@
     "repository": "https://github.com/wyruzz/xnu_bootshim_SM-A037F",
     "commit": "02bd4c945bd1e070dd0ce406ed97c9abad6c4ad8",
     "role": "SM-A037F MT6765 diagnostic shim, built for Cortex-A53; linker/build hardening added, but XNU handoff, hardware behavior and UART output remain unverified."
+  },
+  "xnu": {
+    "repository": "https://github.com/apple-oss-distributions/xnu",
+    "tag": "xnu-8796.141.3",
+    "commit": "1b191cb58250d0705d8a51287127505aa4bc0789",
+    "role": "Pinned upstream XNU source for porting experiments. Upstream source only; not yet built for SM-A037F, not a supported MT6765 platform, and not a bootable kernel artifact.",
+    "tag_object": "f625db25f47631424dc62ac1c3414b6e530f7e8a",
+    "tag_signature": "unsigned"
   }
 }

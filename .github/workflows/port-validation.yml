@@ -1,0 +1,32 @@
+name: a03s-port-validation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  validate-port-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install AArch64 cross-toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu python3
+      - name: Validate board, source pins, and layout
+        run: python3 tools/validate_board.py && python3 tools/validate_sources.py && python3 -m unittest discover -s tests -p 'test_port_layout.py'
+      - name: Native FDT smoke test
+        run: cc -std=c11 -Wall -Wextra -Werror -Ishim shim/fdt.c shim/tests/fdt_smoke.c -o "$RUNNER_TEMP/fdt-smoke" && "$RUNNER_TEMP/fdt-smoke"
+      - name: Build diagnostic shim only
+        env:
+          CROSS_COMPILE: aarch64-linux-gnu-
+          SHIM_OUT: ${{ runner.temp }}/bootshim
+        run: ./shim/build.sh
+      - name: Assert diagnostic-only metadata
+        env:
+          SHIM_OUT: ${{ runner.temp }}/bootshim
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          m=json.loads((Path(os.environ['SHIM_OUT'])/'build.json').read_text())
+          assert m['kind']=='diagnostic-shim' and m['xnu_boot_verified'] is False and m['hardware_tested'] is False
+          print(json.dumps(m,indent=2))
+          PY

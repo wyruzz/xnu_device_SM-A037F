@@ -1,0 +1,24 @@
+name: A03s offline boot-format tests
+on:
+  push:
+    paths:
+      - "tools/pack_android_boot_v2.py"
+      - "tools/inspect_stock_boot.py"
+      - "tests/test_android_boot_v2_packer.py"
+      - ".github/workflows/a03s-boot-format-tests.yml"
+  pull_request:
+    paths:
+      - "tools/pack_android_boot_v2.py"
+      - "tools/inspect_stock_boot.py"
+      - "tests/test_android_boot_v2_packer.py"
+      - ".github/workflows/a03s-boot-format-tests.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  format-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test generic Android boot v2 container
+        run: python3 -m unittest discover -s tests -p 'test_android_boot_v2_packer.py' -v

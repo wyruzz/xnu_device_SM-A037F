@@ -6,7 +6,7 @@
   },
   "bootshim": {
     "repository": "https://github.com/wyruzz/xnu_bootshim_SM-A037F",
-    "commit": "1735f1af2a8f2fae3d2414351404a006cab76d1b",
+    "commit": "02bd4c945bd1e070dd0ce406ed97c9abad6c4ad8",
     "role": "SM-A037F MT6765 diagnostic shim, built for Cortex-A53; linker/build hardening added, but XNU handoff, hardware behavior and UART output remain unverified."
   }
 }

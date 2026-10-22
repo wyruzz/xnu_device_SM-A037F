@@ -46,8 +46,8 @@ def inspect(blob):
     elif recovery_dtbo_size:
         offsets["recovery_dtbo"]["header_offset_matches_layout"] = True
 
-    cmdline = blob[64:576].split(b"\\0", 1)[0].decode("ascii", "replace")
-    extra = blob[608:1632].split(b"\\0", 1)[0].decode("ascii", "replace")
+    cmdline = blob[64:576].split(bytes([0]), 1)[0].decode("ascii", "replace")
+    extra = blob[608:1632].split(bytes([0]), 1)[0].decode("ascii", "replace")
     return {
         "file_size": len(blob),
         "header_version": version,

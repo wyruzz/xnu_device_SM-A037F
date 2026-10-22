@@ -2,10 +2,11 @@
   "kernel": {
     "repository": "https://github.com/mouseos/xnu_kernel_benesse_a04br3",
     "commit": "14401856a9c8ec6f6539ae433762abd71fd430db",
-    "role": "HS USB root console with verified bsdiff self-update; SSIDs in Setup; zlib full-res fb capture; a04-root-tweaks Setup skip; hw.product iPhone10,3 matching the iPhone X userland."
+    "role": "DONOR ONLY: A04BR3/MT8167 kernel; not a validated Galaxy A03s kernel and must not be packaged for SM-A037F."
   },
   "bootshim": {
-    "repository": "https://github.com/mouseos/xnu_bootshim_benesse_a04br3",
-    "commit": "f82c3b85e26bb5a2be8045776a5af78215d35982"
+    "repository": "https://github.com/wyruzz/xnu_bootshim_SM-A037F",
+    "commit": "f232e20fd8150d1be3ba5173aac77d012030a2a6",
+    "role": "SM-A037F MT6765 diagnostic shim; hardware handoff and UART output remain unverified."
   }
 }

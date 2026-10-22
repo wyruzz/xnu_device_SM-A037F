@@ -1,3 +1,5 @@
+> **Target changed: Samsung Galaxy A03s SM-A037F (MT6765), not Benesse TAB-A04-BR3 (MT8167).** This fork is being adapted. The inherited A04BR3 build/packaging scripts, MT8167 DTS, bootopt prefix, load assumptions, and GPT layouts are **donor-only and must not be used to generate or flash an A03s image**. The device-specific evidence currently recorded in [board.json](board.json) and [docs/SM-A037F-PORTING-DATA.md](docs/SM-A037F-PORTING-DATA.md) comes from the A03s diagnostic capture. A matching runtime DTB and a verified MT6765 boot-image path are still needed before producing a device-test image.
+
 > **Work in progress / 作業中:** Experimental XNU port for Benesse TAB-A04-BR3 (MT8167). XNU entry has been observed, but the device currently watchdog-reboots; a working OS is not available.
 
 # TAB-A04-BR3 XNU device sources

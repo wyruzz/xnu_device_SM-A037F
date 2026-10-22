@@ -36,7 +36,7 @@ class A03sBoardTests(unittest.TestCase):
         board = json.loads((ROOT / "board.json").read_text())
         self.assertEqual(board["port_status"]["device_specific_dts"],
                          "not yet available as a source DTS; do not substitute the MT8167 donor DTS")
-        self.assertFalse(board["port_status"]["xnu_handoff"] == "hardware-tested")
+        self.assertEqual(board["port_status"]["xnu_handoff"], "not implemented or hardware-tested")
 
 
 if __name__ == "__main__":

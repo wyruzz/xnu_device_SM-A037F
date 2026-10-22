@@ -73,6 +73,14 @@ def main():
     parser.add_argument("--fairplay-service", choices=("unchanged","disabled","restored"),
         default="unchanged", help="Development native launchd override; does not implement FairPlay")
     args = parser.parse_args()
+    board_metadata = json.loads((ROOT / 'board.json').read_text())
+    if board_metadata.get('model') == 'Samsung Galaxy A03s SM-A037F':
+        parser.error(
+            'A03s image packaging is not implemented yet. This script still '
+            'uses the donor MT8167 DTS, Android v0/MediaTek section framing, '
+            'and A04BR3 bootopt assumptions. Build the A03s bootshim separately; '
+            'do not package or flash an image with this donor builder.'
+        )
     if args.display_hz != 5 and not args.fast_development:
         parser.error('--display-hz requires --fast-development')
     if args.fairplay_service != "unchanged" and not (args.full_donor_root and args.prepare_development_root):

@@ -10,6 +10,18 @@ The old DTS, bootopt, load assumptions, board-specific kernel switches, and
 GPT layouts are retained only as donor reference; do not use them to produce
 or flash an A03s image.
 
+## Unified repository layout
+
+This tree follows the broad layout of [iOS-MT6765](https://github.com/wyruzz/iOS-MT6765), adapted conservatively for SM-A037F:
+
+- `shim/`: diagnostic AArch64 shim sources copied from [xnu_bootshim_SM-A037F](https://github.com/wyruzz/xnu_bootshim_SM-A037F).
+- `device/board.json`: mirror of recorded board facts; root `board.json` remains canonical.
+- `layouts/`: planning metadata, not a validated physical memory map or boot-image recipe.
+- `tools/package.py`: checksummed development archive only, never a Samsung boot image.
+- `xnu/`: provenance and porting notes; no A03s XNU kernel or patch series is claimed ready.
+
+Build the diagnostic shim with `CROSS_COMPILE=aarch64-linux-gnu- SHIM_OUT="$PWD/out/bootshim" ./shim/build.sh`. Run `python3 tools/validate_board.py` and `python3 -m unittest discover -s tests -p 'test_port_layout.py'` for host-side checks. The inherited MT8167 DTS/kernel/packer are not valid for MT6765 by default. Missing XNU, payload, ramdisk, and verified image framing remain blockers; do not flash the diagnostic artifact.
+
 ## Source repositories
 
 - **Device configuration and future packaging:** this repository.

@@ -42,7 +42,7 @@ toolchain prefix). Then run:
 
     git clone https://github.com/wyruzz/xnu_device_SM-A037F.git device
     git clone https://github.com/wyruzz/xnu_bootshim_SM-A037F.git bootshim
-    git -C bootshim checkout f232e20fd8150d1be3ba5173aac77d012030a2a6
+    git -C bootshim checkout 1d5a26c4a18e9886d0338185c2de52237e0e76c0
     CROSS_COMPILE=aarch64-elf- SHIM_OUT="$PWD/out/bootshim" ./bootshim/build.sh
 
 The script emits a raw ARM64 Linux Image-format container at

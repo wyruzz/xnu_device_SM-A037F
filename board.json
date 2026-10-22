@@ -1,34 +1,53 @@
 {
-  "model": "TAB-A04-BR3",
-  "soc": "MT8167",
-  "cpu": "cortex-a35",
-  "cores": 4,
-  "uart_physical_address": "0x11005000",
-  "uart_baud_inherited_from_lk": 921600,
-  "boot_partition_bytes": 134217728,
-  "kernel_load_address": "0x40080000",
-  "initial_stage": "Source-built XNU entry handoff; hardware verification pending",
-  "partition_changes_required_for_diagnostic": false,
-  "boot_image": {
-    "page_bytes": 2048,
-    "kernel_addr": "0x40080000",
-    "ramdisk_addr": "0x80000000",
-    "second_addr": "0x40f00000",
-    "tags_addr": "0x4e000000",
-    "header_version": 0,
-    "mtk_header_fill": 255,
-    "kernel_gzip_alignment": 512,
-    "cmdline": "bootopt=64S3,32N2,64N2"
+  "model": "Samsung Galaxy A03s SM-A037F",
+  "soc": "MediaTek MT6765V/WB (Helio P35 family)",
+  "cpu": "ARM Cortex-A53",
+  "cores": 8,
+  "evidence": {
+    "source": "A03s diagnostic archive: captured live device-tree properties and stock boot image header",
+    "memory_base": "0x40000000",
+    "memory_size": "0x100000000",
+    "memory_end_exclusive": "0x140000000",
+    "memory_note": "Physical DRAM span reported by the captured device tree; reserved-memory exclusions still apply.",
+    "fdt_size_bytes": 195626,
+    "uart": {
+      "node": "serial@11020000",
+      "reg_base": "0x11002000",
+      "reg_size": "0x1000",
+      "baud_rate": null,
+      "status": "UART register base observed in captured DT; output and pin routing are not verified."
+    },
+    "boot_image": {
+      "header_version": 2,
+      "page_size": 2048,
+      "kernel_size": 12409268,
+      "kernel_addr": "0x40080000",
+      "ramdisk_size": 1448717,
+      "ramdisk_addr": "0x51b00000",
+      "second_size": 0,
+      "tags_addr": "0x47880000",
+      "note": "Observed stock boot header values. They are evidence for the stock image, not yet a validated XNU/shim load layout."
+    },
+    "partitions": {
+      "boot": "/dev/block/mmcblk0p37",
+      "dtbo": "/dev/block/mmcblk0p12",
+      "vbmeta": "/dev/block/mmcblk0p13",
+      "recovery": "/dev/block/mmcblk0p38"
+    },
+    "reserved_memory": {
+      "note": "Dynamic reservations are requests/constraints, not fixed assigned physical addresses. Parse the runtime DTB before choosing XNU memory.",
+      "ssmr_cma_size": "0x18000000",
+      "wifi_size": "0x300000",
+      "sspm_shared_size": "0x510000",
+      "connectivity_size": "0x440000",
+      "scp_shared_size": "0x300000",
+      "ion_size": "0x5000"
+    }
   },
-  "xnu_handoff": {
-    "physical_base": "0x60000000",
-    "managed_size": "0x18000000",
-    "cmdline": "-v serial=3 debug=0x14e keepsyms=1 cpus=1 -noprogress"
-  },
-  "full_donor_handoff": {
-    "physical_base": "0x60000000",
-    "managed_size": "0x5e000000",
-    "ramdisk_addr": "0x50000000",
-    "evidence": "Hardware FDT: contiguous RAM to 0xbe9c0000; all reported reservations excluded"
+  "port_status": {
+    "device_specific_dts": "not yet available as a source DTS; do not substitute the MT8167 donor DTS",
+    "boot_image_packaging": "not yet adapted/validated for the A03s MT6765 boot chain",
+    "xnu_handoff": "not implemented or hardware-tested",
+    "partition_changes_required_for_diagnostic": false
   }
 }

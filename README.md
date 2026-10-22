@@ -51,6 +51,19 @@ Samsung boot image** and must not be flashed directly. The shim currently logs
 entry state if its UART works and stops; it does not transition exception
 levels or launch XNU.
 
+## Inspect the stock boot image
+
+The read-only inspector records the standard Android v2 header and calculated
+section offsets from an extracted stock boot image. It does not modify the
+image and does not claim to decode any additional Samsung/MediaTek vendor
+framing:
+
+    python3 tools/inspect_stock_boot.py /path/to/stock-boot.img --json
+
+Use the result to compare the real image with the values recorded in board.json.
+If the tool rejects the image, preserve the original file and investigate its
+header/layout rather than attempting to repack it.
+
 ## Why the image packager is disabled
 
 The inherited tools/build.py emits Android v0 + MediaTek section framing for

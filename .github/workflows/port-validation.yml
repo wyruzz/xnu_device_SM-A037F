@@ -10,8 +10,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install AArch64 cross-toolchain
         run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu python3
-      - name: Validate board and layout
-        run: python3 tools/validate_board.py && python3 -m unittest discover -s tests -p 'test_port_layout.py'
+      - name: Validate board, source pins, and layout
+        run: python3 tools/validate_board.py && python3 tools/validate_sources.py && python3 -m unittest discover -s tests -p 'test_port_layout.py'
       - name: Native FDT smoke test
         run: cc -std=c11 -Wall -Wextra -Werror -Ishim shim/fdt.c shim/tests/fdt_smoke.c -o "$RUNNER_TEMP/fdt-smoke" && "$RUNNER_TEMP/fdt-smoke"
       - name: Build diagnostic shim only

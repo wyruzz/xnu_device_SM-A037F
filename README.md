@@ -18,9 +18,13 @@ This tree follows the broad layout of [iOS-MT6765](https://github.com/wyruzz/iOS
 - `device/board.json`: mirror of recorded board facts; root `board.json` remains canonical.
 - `layouts/`: planning metadata, not a validated physical memory map or boot-image recipe.
 - `tools/package.py`: checksummed development archive only, never a Samsung boot image.
-- `xnu/`: provenance and porting notes; no A03s XNU kernel or patch series is claimed ready.
+- `xnu/`: pinned upstream XNU baseline (`xnu-8796.141.3`) and porting notes; no A03s kernel or patch series is claimed ready.
 
 Build the diagnostic shim with `CROSS_COMPILE=aarch64-linux-gnu- SHIM_OUT="$PWD/out/bootshim" ./shim/build.sh`. Run `python3 tools/validate_board.py` and `python3 -m unittest discover -s tests -p 'test_port_layout.py'` for host-side checks. The inherited MT8167 DTS/kernel/packer are not valid for MT6765 by default. Missing XNU, payload, ramdisk, and verified image framing remain blockers; do not flash the diagnostic artifact.
+
+## Pinned XNU source baseline
+
+The repository now pins Apple XNU tag `xnu-8796.141.3` to commit `1b191cb58250d0705d8a51287127505aa4bc0789` in `sources.lock.json`. The upstream tag is unsigned. This is a reproducible source reference, not a claim of MT6765 support or a built kernel. See [xnu/README.md](xnu/README.md). CI validates the lock metadata; it does not yet build XNU.
 
 ## Source repositories
 
